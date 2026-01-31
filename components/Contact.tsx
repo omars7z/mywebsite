@@ -132,14 +132,14 @@ export default function Contact() {
                 <h3 className="text-2xl font-bold text-cyan-400 mb-6">Contact Information</h3>
                 <div className="space-y-4">
                   <motion.a
-                    href="mailto:your.email@example.com"
+                    href="mailto:iamomarjr@gmail.com"
                     className="flex items-center gap-4 text-gray-300 hover:text-cyan-400 transition-colors"
                     whileHover={{ x: 5 }}
                   >
                     <div className="p-3 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg">
                       <Mail size={20} className="text-black" />
                     </div>
-                    <span>your.email@example.com</span>
+                    <span>iamomarjr@gmail.com</span>
                   </motion.a>
                   <div className="flex items-center gap-4 text-gray-300">
                     <div className="p-3 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-lg">
@@ -154,7 +154,7 @@ export default function Contact() {
                 <h3 className="text-2xl font-bold text-cyan-400 mb-6">Connect With Me</h3>
                 <div className="flex gap-4">
                   <motion.a
-                    href="https://github.com"
+                    href="https://github.com/omars7z"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-4 glass rounded-lg text-gray-300 hover:text-cyan-400 transition-all"
@@ -164,7 +164,7 @@ export default function Contact() {
                     <Github size={24} />
                   </motion.a>
                   <motion.a
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/in/omar-altamimi-3a6883207/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-4 glass rounded-lg text-gray-300 hover:text-cyan-400 transition-all"
