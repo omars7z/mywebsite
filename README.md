@@ -8,6 +8,7 @@ A high-performance, responsive personal portfolio website built with Next.js (Ap
 - ✨ **Glassmorphism Effects** - Modern glass-like UI elements
 - 🎭 **Smooth Animations** - Powered by Framer Motion
 - 🖱️ **Interactive Cursor Gradient** - Glowing gradient that follows your cursor
+- 🤖 **AI Chatbot** - Intelligent portfolio assistant powered by Groq API (free)
 - 📱 **Fully Responsive** - Optimized for all device sizes
 - 🔍 **SEO Optimized** - Built-in metadata and semantic HTML
 - ⚡ **High Performance** - Next.js App Router for optimal loading
@@ -40,12 +41,21 @@ cd personalWebsite
 npm install
 ```
 
-3. Run the development server:
+3. Set up the Chatbot API (Optional but recommended):
+   - Get a free API key from [Groq Console](https://console.groq.com/)
+   - Create a `.env.local` file in the root directory
+   - Add your API key:
+     ```
+     GROQ_API_KEY=your_groq_api_key_here
+     ```
+   - The chatbot will work without the API key but will show an error message
+
+4. Run the development server:
 ```bash
 npm run dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Project Structure
 
@@ -94,6 +104,11 @@ personalWebsite/
 6. **Contact** (`components/Contact.tsx`):
    - Update email and social links
    - Connect form to your backend/email service
+
+7. **Chatbot** (`app/api/chat/route.ts`):
+   - Update the system prompt with your information
+   - The chatbot uses Groq's free API with llama-3.2-3b-instruct model
+   - Make sure to set `GROQ_API_KEY` in `.env.local`
 
 ### Styling
 

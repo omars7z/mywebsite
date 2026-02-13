@@ -22,6 +22,7 @@ export default function Chatbot() {
     },
   ]);
   const [inputValue, setInputValue] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -39,9 +40,9 @@ export default function Chatbot() {
     }
   }, [isOpen]);
 
-  const handleSend = (e: React.FormEvent) => {
+  const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!inputValue.trim()) return;
+    if (!inputValue.trim() || isLoading) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -51,47 +52,53 @@ export default function Chatbot() {
     };
 
     setMessages((prev) => [...prev, userMessage]);
+    const currentInput = inputValue;
     setInputValue('');
+    setIsLoading(true);
 
-    // Simulate bot response
-    setTimeout(() => {
+    try {
+      // Build conversation history (last 10 messages for context)
+      const conversationHistory = messages
+        .slice(-10)
+        .map((msg) => ({
+          sender: msg.sender,
+          text: msg.text,
+        }));
+
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: currentInput,
+          conversationHistory,
+        }),
+      });
+
+      const data = await response.json();
+      
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
-        text: getBotResponse(inputValue),
+        text: data.message,
         sender: 'bot',
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, botResponse]);
-    }, 1000);
+    } catch (error) {
+      console.error('Error sending message:', error);
+      const errorResponse: Message = {
+        id: (Date.now() + 1).toString(),
+        text: "I'm sorry, I'm having trouble responding right now. Please try again later.",
+        sender: 'bot',
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, errorResponse]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const getBotResponse = (userInput: string): string => {
-    const lowerInput = userInput.toLowerCase();
-
-    if (lowerInput.includes('hello') || lowerInput.includes('hi') || lowerInput.includes('hey')) {
-      return "Hello! I'm here to help you learn more about this portfolio. Feel free to ask about projects, skills, or experience!";
-    }
-    if (lowerInput.includes('project') || lowerInput.includes('work')) {
-      return "The portfolio features several projects including SmartLearner (multi-agent learning platform), GenImage Deepfake Detection, Bitcoin Blockchain Analysis, and a Timesheet Platform. Would you like to know more about any specific project?";
-    }
-    if (lowerInput.includes('skill') || lowerInput.includes('technology')) {
-      return "The skills include AI/ML (LLMs, RAG, Agentic Workflows), Backend (Python, FastAPI, Flask), DevOps (Docker, Kubernetes, AWS), and Cybersecurity (Forensic Analysis, Penetration Testing).";
-    }
-    if (lowerInput.includes('experience') || lowerInput.includes('internship')) {
-      return "The experience includes a Software Engineering Internship at Tarjama, exchange student programs in the US and EU, and currently pursuing a CS degree at JUST (graduating 2026).";
-    }
-    if (lowerInput.includes('contact') || lowerInput.includes('email')) {
-      return "You can reach out through the contact form on this page or via the social links in the hero section. Feel free to connect on GitHub or LinkedIn!";
-    }
-    if (lowerInput.includes('about') || lowerInput.includes('background')) {
-      return "This is a portfolio of a CS student at JUST, passionate about AI, machine learning, and open-source development. An active contributor to Oppia and experienced in building intelligent systems.";
-    }
-    if (lowerInput.includes('cv') || lowerInput.includes('resume')) {
-      return "You can download the CV by clicking the 'Download CV' button in the hero section at the top of the page.";
-    }
-
-    return "That's interesting! I'm here to help you learn more about this portfolio. You can ask about projects, skills, experience, or how to get in touch. What would you like to know?";
-  };
 
   return (
     <>
@@ -124,7 +131,7 @@ export default function Chatbot() {
                   <Bot size={20} className="text-black" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-cyan-400">Omar's Portfolio Assistant</h3>
+                  <h3 className="font-semibold text-cyan-400">Omar&apos;s Portfolio Assistant</h3>
                   <p className="text-xs text-gray-400">Online</p>
                 </div>
               </div>
@@ -151,7 +158,7 @@ export default function Chatbot() {
                         : 'glass text-gray-200'
                     }`}
                   >
-                    <p className="text-sm leading-relaxed">{message.text}</p>
+                    <p className="text-sm leading-relaxed whitespace-pre-line">{message.text}</p>
                     <p className="text-xs mt-1 opacity-70">
                       {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </p>
@@ -179,12 +186,16 @@ export default function Chatbot() {
                 />
                 <motion.button
                   type="submit"
-                  disabled={!inputValue.trim()}
+                  disabled={!inputValue.trim() || isLoading}
                   className="px-4 py-2 bg-gradient-to-br from-cyan-400 to-blue-500 text-black rounded-lg hover:from-cyan-500 hover:to-blue-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Send size={20} />
+                  {isLoading ? (
+                    <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    <Send size={20} />
+                  )}
                 </motion.button>
               </div>
             </form>
