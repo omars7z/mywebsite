@@ -13,6 +13,7 @@ export default function Projects() {
       featured: true,
       github: 'https://github.com',
       demo: 'https://demo.com',
+      image: '/SmartLeanrnerPoster.jpeg',
     },
     {
       title: 'GenImage Deepfake Detection',
@@ -21,6 +22,8 @@ export default function Projects() {
       featured: true,
       github: 'https://github.com',
       demo: 'https://demo.com',
+      image: '/DeepFakeProject.png',
+      images: ['/DeepFakeProject2.png'],
     },
     {
       title: 'Bitcoin Blockchain Analysis',

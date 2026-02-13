@@ -1,7 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { GraduationCap, Globe, Code } from 'lucide-react';
+import { GraduationCap, Code } from 'lucide-react';
+import Image from 'next/image';
 
 export default function About() {
   const containerVariants = {
@@ -30,16 +31,20 @@ export default function About() {
       icon: GraduationCap,
       title: 'CS Student at JUST',
       description: 'Graduating 2026, pursuing excellence in computer science and AI',
+      isImage: false,
     },
     {
-      icon: Globe,
+      icon: null,
       title: 'Global Experience',
       description: 'Exchange student in the US and EU, embracing diverse perspectives',
+      isImage: true,
+      imageSrc: '/globalugrad.jpg',
     },
     {
       icon: Code,
       title: 'Open Source Contributor',
       description: 'Active contributor to Oppia, passionate about educational technology',
+      isImage: false,
     },
   ];
 
@@ -76,13 +81,23 @@ export default function About() {
                 variants={itemVariants}
                 className="glass-strong p-8 rounded-xl hover:scale-105 transition-transform"
               >
-                <div className="flex items-center justify-center w-16 h-16 mb-6 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full">
-                  <Icon size={32} className="text-black" />
+                <div className="flex items-center justify-center w-16 h-16 mb-6 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full overflow-hidden">
+                  {highlight.isImage && highlight.imageSrc ? (
+                    <Image 
+                      src={highlight.imageSrc} 
+                      alt={highlight.title}
+                      width={64}
+                      height={64}
+                      className="w-full h-full object-cover rounded-full"
+                    />
+                  ) : Icon ? (
+                    <Icon size={32} className="text-black" />
+                  ) : null}
                 </div>
                 <h3 className="text-xl font-semibold mb-3 text-cyan-400">
                   {highlight.title}
                 </h3>
-                <p className="text-gray-300 leading-relaxed">
+                <p className="leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                   {highlight.description}
                 </p>
               </motion.div>
@@ -97,14 +112,14 @@ export default function About() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="glass-strong p-8 md:p-12 rounded-xl max-w-4xl mx-auto"
         >
-          <p className="text-lg text-gray-300 leading-relaxed mb-4">
+          <p className="text-lg leading-relaxed mb-4" style={{ color: 'var(--text-secondary)' }}>
             As a Computer Science student at Jordan University of Science and Technology (JUST), 
-            I'm passionate about pushing the boundaries of artificial intelligence and software engineering. 
+            I&apos;m passionate about pushing the boundaries of artificial intelligence and software engineering. 
             My journey has taken me across continents as an exchange student, enriching my perspective 
             and technical skills.
           </p>
-          <p className="text-lg text-gray-300 leading-relaxed">
-            I'm deeply committed to open-source development, contributing to projects like Oppia that 
+          <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+            I&apos;m deeply committed to open-source development, contributing to projects like Oppia that 
             make quality education accessible to everyone. My focus lies in building intelligent systems 
             that solve real-world problems, from multi-agent learning platforms to deepfake detection 
             systems.

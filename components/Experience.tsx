@@ -69,7 +69,7 @@ export default function Experience() {
                   className="relative pl-20"
                 >
                   {/* Timeline dot */}
-                  <div className="absolute left-6 top-2 w-4 h-4 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full border-4 border-black z-10"></div>
+                  <div className="absolute left-6 top-2 w-4 h-4 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full border-4 z-10" style={{ borderColor: 'var(--background)' }}></div>
 
                   <div className="glass-strong rounded-xl p-6 hover:scale-[1.02] transition-transform">
                     <div className="flex items-start gap-4 mb-4">
@@ -80,10 +80,10 @@ export default function Experience() {
                         <h3 className="text-xl font-bold text-cyan-400 mb-1">
                           {exp.title}
                         </h3>
-                        <p className="text-lg font-semibold text-gray-300 mb-2">
+                        <p className="text-lg font-semibold mb-2" style={{ color: 'var(--text-secondary)' }}>
                           {exp.company}
                         </p>
-                        <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400">
+                        <div className="flex flex-wrap items-center gap-4 text-sm" style={{ color: 'var(--text-tertiary)' }}>
                           <span className="flex items-center gap-1">
                             <MapPin size={14} />
                             {exp.location}
@@ -95,7 +95,7 @@ export default function Experience() {
                         </div>
                       </div>
                     </div>
-                    <p className="text-gray-300 leading-relaxed">
+                    <p className="leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                       {exp.description}
                     </p>
                   </div>

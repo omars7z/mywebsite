@@ -66,7 +66,8 @@ export default function Skills() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: (categoryIndex * 0.1) + (skillIndex * 0.05) }}
                     whileHover={{ scale: 1.1, y: -2 }}
-                    className="px-4 py-2 glass rounded-lg text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors cursor-default"
+                    className="px-4 py-2 glass rounded-lg text-sm font-medium hover:text-cyan-400 transition-colors cursor-default"
+                    style={{ color: 'var(--text-secondary)' }}
                   >
                     {skill}
                   </motion.span>

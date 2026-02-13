@@ -47,8 +47,8 @@ export default function Contact() {
               </span>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto mb-8"></div>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-              Have a project in mind or want to collaborate? I'd love to hear from you.
+            <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
+              Have a project in mind or want to collaborate? I&apos;d love to hear from you.
             </p>
           </motion.div>
 
@@ -63,7 +63,7 @@ export default function Contact() {
             >
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
                     Name
                   </label>
                   <input
@@ -78,7 +78,7 @@ export default function Contact() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
                     Email
                   </label>
                   <input
@@ -93,7 +93,7 @@ export default function Contact() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
                     Message
                   </label>
                   <textarea
@@ -133,7 +133,8 @@ export default function Contact() {
                 <div className="space-y-4">
                   <motion.a
                     href="mailto:iamomarjr@gmail.com"
-                    className="flex items-center gap-4 text-gray-300 hover:text-cyan-400 transition-colors"
+                    className="flex items-center gap-4 hover:text-cyan-400 transition-colors"
+                    style={{ color: 'var(--text-secondary)' }}
                     whileHover={{ x: 5 }}
                   >
                     <div className="p-3 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg">
@@ -141,7 +142,7 @@ export default function Contact() {
                     </div>
                     <span>iamomarjr@gmail.com</span>
                   </motion.a>
-                  <div className="flex items-center gap-4 text-gray-300">
+                  <div className="flex items-center gap-4" style={{ color: 'var(--text-secondary)' }}>
                     <div className="p-3 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-lg">
                       <MapPin size={20} className="text-black" />
                     </div>
@@ -157,7 +158,8 @@ export default function Contact() {
                     href="https://github.com/omars7z"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-4 glass rounded-lg text-gray-300 hover:text-cyan-400 transition-all"
+                    className="p-4 glass rounded-lg hover:text-cyan-400 transition-all"
+                    style={{ color: 'var(--text-secondary)' }}
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     whileTap={{ scale: 0.9 }}
                   >
@@ -167,7 +169,8 @@ export default function Contact() {
                     href="https://www.linkedin.com/in/omar-altamimi-3a6883207/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-4 glass rounded-lg text-gray-300 hover:text-cyan-400 transition-all"
+                    className="p-4 glass rounded-lg hover:text-cyan-400 transition-all"
+                    style={{ color: 'var(--text-secondary)' }}
                     whileHover={{ scale: 1.1, rotate: -5 }}
                     whileTap={{ scale: 0.9 }}
                   >
@@ -183,7 +186,7 @@ export default function Contact() {
       {/* Footer */}
       <footer className="relative py-8 px-4 sm:px-6 lg:px-8 border-t border-gray-800 z-10">
         <div className="max-w-7xl mx-auto text-center">
-          <p className="text-gray-400">
+          <p style={{ color: 'var(--text-tertiary)' }}>
             © {new Date().getFullYear()} Portfolio. Built with Next.js, TypeScript, and Tailwind CSS.
           </p>
         </div>

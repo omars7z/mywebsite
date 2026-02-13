@@ -11,11 +11,15 @@ export default function CursorGradient({ mousePosition }: CursorGradientProps) {
 
   useEffect(() => {
     if (gradientRef.current) {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const opacity = isDark ? 0.15 : 0.08;
+      const opacity2 = isDark ? 0.1 : 0.05;
+      
       gradientRef.current.style.background = `
         radial-gradient(
           600px circle at ${mousePosition.x}px ${mousePosition.y}px,
-          rgba(0, 255, 255, 0.15),
-          rgba(0, 100, 255, 0.1),
+          rgba(0, 255, 255, ${opacity}),
+          rgba(0, 100, 255, ${opacity2}),
           transparent 40%
         )
       `;

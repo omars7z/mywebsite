@@ -51,7 +51,8 @@ export default function Navbar() {
               <motion.a
                 key={item.name}
                 href={item.href}
-                className="text-gray-300 hover:text-cyan-400 transition-colors relative"
+                className="hover:text-cyan-400 transition-colors relative"
+                style={{ color: 'var(--text-secondary)' }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -67,7 +68,8 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white"
+            className="md:hidden"
+            style={{ color: 'var(--foreground)' }}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -87,7 +89,8 @@ export default function Navbar() {
               <a
                 key={item.name}
                 href={item.href}
-                className="block text-gray-300 hover:text-cyan-400 transition-colors"
+                className="block hover:text-cyan-400 transition-colors"
+                style={{ color: 'var(--text-secondary)' }}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.name}

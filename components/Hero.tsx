@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Download, Github, Linkedin, Mail } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Hero() {
   const containerVariants = {
@@ -26,8 +27,21 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20">
-      <div className="max-w-7xl mx-auto text-center z-10">
+    <section id="home" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20 overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0 opacity-20 dark:opacity-30">
+        <Image
+          src="/personalpic.png"
+          alt="Personal"
+          fill
+          className="object-cover object-center"
+          priority
+          quality={90}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50 dark:to-black/30" />
+      </div>
+
+      <div className="max-w-7xl mx-auto text-center z-10 relative">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -35,16 +49,17 @@ export default function Hero() {
         >
           <motion.h1
             variants={itemVariants}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6"
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 relative"
           >
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient relative z-10">
               Software & AI Engineer
             </span>
           </motion.h1>
 
           <motion.p
             variants={itemVariants}
-            className="text-xl sm:text-2xl md:text-3xl text-gray-300 mb-8 max-w-3xl mx-auto"
+            className="text-xl sm:text-2xl md:text-3xl mb-8 max-w-3xl mx-auto relative z-10 drop-shadow-lg"
+            style={{ color: 'var(--text-secondary)' }}
           >
             Building agentic workflows and deep learning solutions
           </motion.p>
@@ -56,7 +71,8 @@ export default function Hero() {
             <motion.a
               href="/cv.pdf"
               download
-              className="glass-strong px-8 py-4 rounded-lg font-semibold text-white hover:text-cyan-400 transition-all flex items-center gap-2 group"
+              className="glass-strong px-8 py-4 rounded-lg font-semibold hover:text-cyan-400 transition-all flex items-center gap-2 group"
+              style={{ color: 'var(--foreground)' }}
               whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(0, 255, 255, 0.3)' }}
               whileTap={{ scale: 0.95 }}
             >
@@ -69,7 +85,8 @@ export default function Hero() {
                 href="https://github.com/omars7z"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass p-3 rounded-full text-gray-300 hover:text-cyan-400 transition-all"
+                className="glass p-3 rounded-full hover:text-cyan-400 transition-all"
+              style={{ color: 'var(--text-secondary)' }}
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
               >
@@ -79,7 +96,8 @@ export default function Hero() {
                 href="https://www.linkedin.com/in/omar-altamimi-3a6883207/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass p-3 rounded-full text-gray-300 hover:text-cyan-400 transition-all"
+                className="glass p-3 rounded-full hover:text-cyan-400 transition-all"
+              style={{ color: 'var(--text-secondary)' }}
                 whileHover={{ scale: 1.1, rotate: -5 }}
                 whileTap={{ scale: 0.9 }}
               >
@@ -87,7 +105,8 @@ export default function Hero() {
               </motion.a>
               <motion.a
                 href="mailto:iamomarjr@gmail.com"
-                className="glass p-3 rounded-full text-gray-300 hover:text-cyan-400 transition-all"
+                className="glass p-3 rounded-full hover:text-cyan-400 transition-all"
+              style={{ color: 'var(--text-secondary)' }}
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
               >

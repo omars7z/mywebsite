@@ -10,6 +10,7 @@ import Experience from '@/components/Experience';
 import Contact from '@/components/Contact';
 import CursorGradient from '@/components/CursorGradient';
 import Chatbot from '@/components/Chatbot';
+import ThemeToggle from '@/components/ThemeToggle';
 
 export default function Home() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -24,8 +25,9 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="relative min-h-screen bg-black text-white overflow-hidden">
+    <main className="relative min-h-screen bg-[var(--background)] text-[var(--foreground)] overflow-hidden transition-colors duration-300">
       <CursorGradient mousePosition={mousePosition} />
+      <ThemeToggle />
       <Navbar />
       <Hero />
       <About />
