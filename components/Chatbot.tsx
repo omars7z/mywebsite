@@ -16,7 +16,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: "Hello! I'm your portfolio assistant. How can I help you today?",
+      text: "Hello! I'm your portfolio assistant. What wouuld you like to know about Omar?",
       sender: 'bot',
       timestamp: new Date(),
     },
@@ -76,11 +76,23 @@ export default function Chatbot() {
         }),
       });
 
-      const data = await response.json();
-      
+      let data: any = null;
+      try {
+        data = await response.json();
+      } catch (err) {
+        console.error('Failed to parse response JSON from /api/chat', err);
+      }
+
+      let botText = "I'm sorry, I couldn't process that request.";
+      if (data?.message) {
+        botText = data.message;
+      } else if (!response.ok) {
+        botText = `Server error (${response.status}): ${response.statusText || 'Unknown'}`;
+      }
+
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
-        text: data.message,
+        text: botText,
         sender: 'bot',
         timestamp: new Date(),
       };

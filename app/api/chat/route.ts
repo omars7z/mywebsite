@@ -52,9 +52,13 @@ Be friendly, helpful, and concise. Answer questions about Omar, his skills, proj
     const apiKey = process.env.GROQ_API_KEY;
     
     if (!apiKey || apiKey === 'gsk_your_key_here') {
-      return NextResponse.json({
-        message: "Please set up your Groq API key in .env.local to enable the chatbot. Get a free key from https://console.groq.com/"
-      });
+      return NextResponse.json(
+        {
+          message:
+            "Please set up your Groq API key in .env.local to enable the chatbot. Get a free key from https://console.groq.com/",
+        },
+        { status: 400 }
+      );
     }
 
     // Use Groq API (free and fast)
@@ -73,13 +77,21 @@ Be friendly, helpful, and concise. Answer questions about Omar, his skills, proj
     });
 
     if (!response.ok) {
-      const errorData = await response.text();
-      console.error('Groq API error:', errorData);
-      throw new Error(`Groq API error: ${response.statusText}`);
+      const errorText = await response.text();
+      console.error('Groq API error:', errorText);
+      // Surface the provider error (safely) to the client to help debugging
+      return NextResponse.json(
+        { message: `Provider error: ${response.status} ${response.statusText}` },
+        { status: response.status }
+      );
     }
 
-    const data = await response.json();
-    const botMessage = data.choices[0]?.message?.content || "I'm sorry, I couldn't process that request.";
+    const data = await response.json().catch((err) => {
+      console.error('Failed to parse Groq response as JSON', err);
+      return null;
+    });
+
+    const botMessage = data?.choices?.[0]?.message?.content || "I'm sorry, I couldn't process that request.";
 
     return NextResponse.json({ message: botMessage });
   } catch (error) {
